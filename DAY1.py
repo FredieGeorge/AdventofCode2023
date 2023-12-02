@@ -22,7 +22,7 @@ for i in lines:
             if last[0]>m.start():
                 last[0]=m.start()
                 last[1]=j
-    print(first,last,digits)
+    print(first,last)
     sum+=(10*dict_a[first[1]]+dict_a[last[1]])
             
     
