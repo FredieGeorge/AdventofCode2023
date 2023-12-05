@@ -2,41 +2,39 @@ f=open("DAY3",'r')
 symbols=['@', '=', '%', '+', '$', '&', '/', '-', '#','*']
 a=f.readlines()
 coords=[]
-set_num=[]
-import re
-for i in range(1,len(a)-1):
-    for counter,j in enumerate(a[i]):
-        if j in symbols:
-            if a[i][counter-1].isdigit():
-               coords.append((i,counter-1))
-            #do it for all 8 directions
-            if a[i][counter+1].isdigit():
-                coords.append((i,counter+1))
-            if a[i+1][counter].isdigit():
-                coords.append((i+1,counter))
-            if a[i-1][counter].isdigit():
-                coords.append((i-1,counter))
-            if a[i+1][counter+1].isdigit():
-                coords.append((i+1,counter+1))
-            if a[i-1][counter-1].isdigit():
-                coords.append((i-1,counter-1))
-            if a[i+1][counter-1].isdigit():
-                coords.append((i+1,counter-1))
-            if a[i-1][counter+1].isdigit():
-                coords.append((i-1,counter+1))
-for i in [0,len(a)-1]:
-    for counter,j in enumerate(a[i]):
-        if j in symbols:
-            if a[i][counter-1].isdigit():
-               coords.append((i,counter-1))
-            #do it for all 8 directions
-            if a[i][counter+1].isdigit():
-                   coords.append((i,counter+1))
-print(coords)
-sum1=0
-coords.sort(key=lambda x:x[1])
-new_one=[]
-bredd=[]
+# for i in range(1,len(a)-1):
+#     for counter,j in enumerate(a[i]):
+#         if j in symbols:
+#             if a[i][counter-1].isdigit():
+#                coords.append((i,counter-1))
+#             #do it for all 8 directions
+#             if a[i][counter+1].isdigit():
+#                 coords.append((i,counter+1))
+#             if a[i+1][counter].isdigit():
+#                 coords.append((i+1,counter))
+#             if a[i-1][counter].isdigit():
+#                 coords.append((i-1,counter))
+#             if a[i+1][counter+1].isdigit():
+#                 coords.append((i+1,counter+1))
+#             if a[i-1][counter-1].isdigit():
+#                 coords.append((i-1,counter-1))
+#             if a[i+1][counter-1].isdigit():
+#                 coords.append((i+1,counter-1))
+#             if a[i-1][counter+1].isdigit():
+#                 coords.append((i-1,counter+1))
+# for i in [0,len(a)-1]:
+#     for counter,j in enumerate(a[i]):
+#         if j in symbols:
+#             if a[i][counter-1].isdigit():
+#                coords.append((i,counter-1))
+#             #do it for all 8 directions
+#             if a[i][counter+1].isdigit():
+#                    coords.append((i,counter+1))
+# print(coords)
+# sum1=0
+# coords.sort(key=lambda x:x[1])
+# new_one=[]
+# bredd=[]
 # for i,j in coords:
 #     if (i,j-1) not in new_one and (i,j) not in new_one and (i,j-2) not in new_one:
 #         new_one.append((i,j))
