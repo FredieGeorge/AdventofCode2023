@@ -1,16 +1,66 @@
-def function_generator(string,inps):
-    func_def=[]
-    string=string.split('\n')
+def range_in_range(a, b):
+    return (a.start in b and a.stop in b) or (a.start not in b and a.stop not in b)
+def binary_search(nums, target):
+    low, high = 0, len(nums) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if mid == len(nums) - 1 and nums[mid] <= target:
+            return mid
+        elif nums[mid] <= target < nums[mid + 1]:
+            return mid
+        elif nums[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    if target < nums[0]:
+        return -1
+    else:
+        return len(nums) - 1
+
+def function_generator(string, inps):
+    func_def = []
+    string = string.split('\n')
+    
     for i in string:
-        b=list(map(int,i.split(' ')))
-        del_=b[0]-b[1]
-        func_def.append((range(b[1],b[1]+b[2]),del_))
-    for index,num in enumerate(inps):
+        b = list(map(int, i.split(' ')))
+        del_ = b[0] - b[1]
+        func_def.append((range(b[1], b[1] + b[2]), del_))
+    
+    func_def.sort(key=lambda x: x[0].start)
+    a = [i[0].start for i in func_def]
+    a.append(func_def[-1][0].stop)
+    
+    temp = []
+    for i in inps:
+        beginning = binary_search(a, i.start)
+        end = binary_search(a, i.stop)
+        
+        if beginning == end:
+            temp.append(i)
+        else:
+            temp.append(range(i.start, a[beginning + 1]))
+            temp.append(range(a[end], i.stop))
+            l = beginning + 1
+            while l + 1 <= end:
+                temp.append(range(a[l], a[l + 1]))
+                l += 1
+    inps = []
+    for i in temp:
+        add_nothing=True
         for j in func_def:
-            if num in j[0]:
-                inps[index]+=j[1]
+            if i.start in j[0]:
+                inps.append(range(i.start + j[1], i.stop + j[1]))
+                add_nothing=False
+                break
+        if add_nothing:
+            inps.append(i)
     return inps
 
+
+    
 
 
 
@@ -137,7 +187,6 @@ water_light_in="""1833244152 0 764535859
 794563824 1237176557 244191789
 621886817 1190805596 46370961
 3994565455 3403272109 186068531"""
-
 light_to_temperature="""432141642 1268486741 19474646
 3617581823 3276436954 357008111
 3505110084 3786131308 49942802
@@ -152,7 +201,6 @@ light_to_temperature="""432141642 1268486741 19474646
 909738155 3836074110 138515824
 1048253979 2837492192 299739845
 2866648907 3633445065 152686243"""
-
 temperature_to_humidity="""646729740 1519504972 559297346
 1894539176 2990410634 44298872
 232257988 972432123 414471752
@@ -185,7 +233,6 @@ temperature_to_humidity="""646729740 1519504972 559297346
 1983095187 4129082008 165885288
 3698642563 251047688 21462207
 2718009081 581475723 314983749"""
-
 humidity_to_location="""971626884 4275486551 19480745
 1218249913 2090555906 502249162
 2914848039 2902831882 224865747
@@ -201,18 +248,17 @@ humidity_to_location="""971626884 4275486551 19480745
 1720499075 4036479735 32310280
 4290148707 4270667962 4818589
 3519755810 2075729027 14826879"""
-new_seeds=set()
+
+new_seeds=[]
 seeds=[3127166940, 109160474, 3265086325, 86449584, 1581539098, 205205726, 3646327835, 184743451, 2671979893, 17148151, 305618297, 40401857, 2462071712, 203075200, 358806266, 131147346, 1802185716, 538526744, 635790399, 705979250]
-for i in range(9):
-    for no in range(seeds[2*i],seeds[2*i+1]+seeds[2*i]):
-        new_seeds.add(no)
-seeds=list(new_seeds)
-print(len(seeds))
-function_generator(seed_soil_in,seeds)
-function_generator(soil_fertiliser_in,seeds)
-function_generator(fertiliser_water_in,seeds)
-function_generator(water_light_in,seeds)
-function_generator(light_to_temperature,seeds)
-function_generator(temperature_to_humidity,seeds)
-function_generator(humidity_to_location,seeds)
-print(len(seeds),min(seeds))
+for i in range(len(seeds)//2):
+    new_seeds.append(range(seeds[2*i],seeds[2*i]+seeds[2*i+1]))
+#forgor how ppython lists work lmaoo
+a1=function_generator(seed_soil_in,new_seeds)
+a2=function_generator(soil_fertiliser_in,a1)
+a3 =function_generator(fertiliser_water_in,a2)
+a4 =function_generator(water_light_in,a3)
+a5 =function_generator(light_to_temperature,a4)
+a6 =function_generator(temperature_to_humidity,a5)
+a7 =function_generator(humidity_to_location,a6)
+print(min(a7,key=lambda x:x.start),min(a7,key=lambda x:x.stop))
