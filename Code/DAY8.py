@@ -16,19 +16,25 @@ print(b)
 # MGA,AAA,DPA,RDA,TLA,DGA
 list_a=['AAA','MGA','DPA','RDA','TLA','DGA']
 list_b=[]
-for i in list_a:
-    curr_node=i
-    steps=0
-    while curr_node[-1]!="Z":
-        print(curr_node,steps)
-        aleph=steps%len(b)
-        if b[aleph]=="R":
-                curr_node=nodes[curr_node][1]
-                steps+=1
-        elif b[aleph]=="L":
-                curr_node=nodes[curr_node][0]
-                steps+=1
-    list_b.append(steps)
+all_ends_with_Z=False  
+while not all_ends_with_Z:
+    all_ends_with_Z=True  
+    for i in list_a:
+          if i[2]!="Z":
+              all_ends_with_Z=False
+    for i in range(len(list_a)):
+            curr_node=list_a[i]
+            print(curr_node,steps)
+            aleph=steps%len(b)
+            if b[aleph]=="R":
+                    curr_node=nodes[curr_node][1]
+                    steps+=1
+            elif b[aleph]=="L":
+                    curr_node=nodes[curr_node][0]
+                    steps+=1
+            a[i]=curr_node
+        
     
-
-print(list_b)
+#all of the individual nodes and instruction form closed loops so an easier way to do it is to take LCM of all the individiual paths 
+#added that as a png
+print(steps)
