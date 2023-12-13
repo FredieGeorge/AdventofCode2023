@@ -33,29 +33,7 @@ y_values=[i[1] for i in dfs]
 area=x_values[-1]*y_values[0]-x_values[0]*y_values[-1]
 for i in range(len(x_values)-1):
       area+=x_values[i]*y_values[i+1]-x_values[i+1]*y_values[i]
-
-# arbit_x,arbit_y=(0,)
-# lmao=[[i for i in b[j]] for j in range(len(b))]
-# tofill=[(arbit_x,arbit_y)]
-# counter= 0
-# while tofill!=[]:
-#       a_x,a_y=tofill.pop()
-#       if (a_x,a_y) not in dfs and lmao[a_y][a_x]!="#":
-#             lmao[a_y][a_x]="#"
-#             counter+=1
-#             if 0  <=a_y+1<len(b) and 0<=a_x<len(b[0]):
-#                 tofill.append((a_x,a_y+1))
-#             if 0  <=a_y-1<len(b) and 0<=a_x<len(b[0]):
-#                 tofill.append((a_x,a_y-1))
-#             if 0  <=a_y<len(b) and 0<=a_x+1<len(b[0]):
-#                 tofill.append((a_x+1,a_y))
-#             if 0  <=a_y<len(b) and 0<=a_x-1<len(b[0]):
-#                 tofill.append((a_x-1,a_y))
-#       print(counter)
-# #write lmao to a txt file and save it as output.txt
-# f=open("/home/chef/Documents/AdventOfCode/Code/output.txt","w")
-# for i in lmao:
-#     for j in i:
-#         f.write(j)
-#     f.write("\n")
-# f.close()
+lmao=[['◼'if i in ['L','J','7','F','|','-'] else ' 'for i in b[j] ] for j in range(len(b))]
+with open("/home/chef/Documents/AdventOfCode/Code/output.txt","w") as f:
+    for i in range(len(lmao)):
+        f.write(''.join(lmao[i])+'\n')
