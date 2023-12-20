@@ -12,7 +12,7 @@ def return_first_common(a_1,d_1,a_2,d_2):
         else:
             j+=1
     return a_1+i*d_1
-a=return_first_common(3918,3919,4161,4027)
-b=return_first_common(4076,4007,2671,3917)
+a=return_first_common(3919,3919,4027,4027)
+b=return_first_common(4007,4007,3917,3917)
 c=return_first_common(a,lcm(3919,4027),b,lcm(4007,3917))
 print(c)

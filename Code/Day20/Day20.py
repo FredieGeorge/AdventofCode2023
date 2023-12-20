@@ -37,11 +37,11 @@ for i in dict_.keys():
                dict_[j][2][i]=0
 low_count=0
 high_count=0
+oo={}
 for ll in ['ng','qb','qt','mp']:
-    counter=0
-    rx=1
-    lmoa=[]
-    while counter<100_000:
+    oo[ll]=[]
+counter=1
+while counter<100_000:
             todo=['broadcaster']
             low_count+=1
             while todo:
@@ -73,8 +73,9 @@ for ll in ['ng','qb','qt','mp']:
                             poop= poop and value
                         poop=not poop
                         if poop==1:
-                                if temp==ll:
-                                    lmoa.append(counter)
+                                for ll in ['ng','qb','qt','mp']:
+                                      if temp==ll:
+                                        oo[ll].append(counter)
                                 high_count+=len(dict_[temp][1])
                         else:
                                     low_count+=len(dict_[temp][1])
@@ -105,4 +106,4 @@ for ll in ['ng','qb','qt','mp']:
                                 elif dict_[ii][0]=='=':
                                     dict_[ii][2]=dict_[temp][2]
             counter+=1
-    print(lmoa)
+print(oo)
