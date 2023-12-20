@@ -40,7 +40,8 @@ high_count=0
 for ll in ['ng','qb','qt','mp']:
     counter=0
     rx=1
-    while rx:
+    lmoa=[]
+    while counter<100_000:
             todo=['broadcaster']
             low_count+=1
             while todo:
@@ -73,10 +74,7 @@ for ll in ['ng','qb','qt','mp']:
                         poop=not poop
                         if poop==1:
                                 if temp==ll:
-                                    if ll=='qb':
-                                          rx-=0.5
-                                    else:
-                                        rx=0
+                                    lmoa.append(counter)
                                 high_count+=len(dict_[temp][1])
                         else:
                                     low_count+=len(dict_[temp][1])
@@ -107,4 +105,4 @@ for ll in ['ng','qb','qt','mp']:
                                 elif dict_[ii][0]=='=':
                                     dict_[ii][2]=dict_[temp][2]
             counter+=1
-    print(counter)
+    print(lmoa)
